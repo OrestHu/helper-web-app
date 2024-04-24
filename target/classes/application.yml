@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/help-app-db
-    username: help-app
+    url: jdbc:postgresql://help-app-db.che40koqm5a2.eu-north-1.rds.amazonaws.com:5432/postgres
+    username: help_app
     password: help-app-password
     driver-class-name: org.postgresql.Driver
 server:
