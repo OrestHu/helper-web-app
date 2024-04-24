@@ -1,7 +1,7 @@
 package com.horuz.test.helpwebapp.security.config;
 
 import io.jsonwebtoken.SignatureException;
-import com.horuz.test.helpwebapp.utils.JwtTokenUtils;
+import com.horuz.test.helpwebapp.security.utils.JwtTokenUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -5,7 +5,7 @@ import com.horuz.test.helpwebapp.security.model.AccessToken;
 import com.horuz.test.helpwebapp.security.model.req.LoginRequest;
 import com.horuz.test.helpwebapp.security.service.impl.UsersServiceImpl;
 import com.horuz.test.helpwebapp.security.usecase.LoginUseCase;
-import com.horuz.test.helpwebapp.utils.JwtTokenUtils;
+import com.horuz.test.helpwebapp.security.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,4 +1,4 @@
-package com.horuz.test.helpwebapp.utils;
+package com.horuz.test.helpwebapp.security.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
