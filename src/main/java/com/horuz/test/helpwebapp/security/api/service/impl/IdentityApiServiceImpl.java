@@ -5,6 +5,7 @@ import com.horuz.test.helpwebapp.security.api.service.IdentityApiService;
 import com.horuz.test.helpwebapp.security.exception.UserNotFoundException;
 import com.horuz.test.helpwebapp.security.model.Users;
 import com.horuz.test.helpwebapp.security.service.impl.UsersServiceImpl;
+import com.horuz.test.helpwebapp.security.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -12,12 +13,14 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class IdentityApiServiceImpl implements IdentityApiService {
     private final UsersServiceImpl usersService;
+    private final JwtTokenUtils jwtTokenUtils;
 
     private static final String USER_NOT_FOUND = "User not found by id %s";
     @Override
@@ -42,5 +45,21 @@ public class IdentityApiServiceImpl implements IdentityApiService {
                         new UserNotFoundException(String.format(USER_NOT_FOUND, id), HttpStatus.NOT_FOUND)
                 );
         return Optional.of(userAccount);
+    }
+
+    @Override
+    public boolean hasRoleReceiver(String token) {
+        List<String> roles = jwtTokenUtils.getRoles(token);
+
+        return roles.stream()
+                .anyMatch(role -> role.equals("ROLE_USER_RECEIVER"));
+    }
+
+    @Override
+    public boolean hasRoleHelper(String token) {
+        List<String> roles = jwtTokenUtils.getRoles(token);
+
+        return roles.stream()
+                .anyMatch(role -> role.equals("ROLE_USER_HELPER"));
     }
 }

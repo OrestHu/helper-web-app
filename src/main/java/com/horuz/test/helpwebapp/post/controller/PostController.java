@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -30,9 +29,4 @@ public class PostController {
         return postUseCase.findAll();
     }
 
-    @GetMapping("/findSelected")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<PostResponse> findSelected(@RequestBody FindRequest request){
-        return new LinkedList<>();
-    }
 }

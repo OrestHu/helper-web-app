@@ -1,6 +1,7 @@
 package com.horuz.test.helpwebapp.security.exception;
 
 import com.horuz.test.helpwebapp.post.exception.PostExistException;
+import com.horuz.test.helpwebapp.post.exception.PostNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +53,11 @@ public class GlobalExceptionHandler extends Throwable {
 
     @ExceptionHandler(PostExistException.class)
     public ResponseEntity<Object> handlePostExistException(PostExistException ex) {
+        return ResponseEntity.status(ex.getHttpStatus()).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(PostNotFoundException.class)
+    public ResponseEntity<Object> handlePostNotFoundException(PostNotFoundException ex) {
         return ResponseEntity.status(ex.getHttpStatus()).body(ex.getMessage());
     }
 }

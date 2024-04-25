@@ -10,6 +10,6 @@ public class Select {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Long user_id;
-    private Integer post_id;
+    private Long userId;
+    private Integer postId;
 }

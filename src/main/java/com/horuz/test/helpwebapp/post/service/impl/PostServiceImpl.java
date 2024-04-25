@@ -1,6 +1,7 @@
 package com.horuz.test.helpwebapp.post.service.impl;
 
 import com.horuz.test.helpwebapp.post.exception.PostExistException;
+import com.horuz.test.helpwebapp.post.exception.PostNotFoundException;
 import com.horuz.test.helpwebapp.post.model.Post;
 import com.horuz.test.helpwebapp.post.repository.PostRepository;
 import com.horuz.test.helpwebapp.post.service.PostService;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +18,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     private static final String POST_ALREADY_EXIST = "Post %s already exist";
+    private static final String POST_NOT_FOUND_EXIST = "Post %s not found";
     @Override
     public void createPost(Post post) {
         if(postRepository.existsByName(post.getName())){
@@ -29,4 +32,14 @@ public class PostServiceImpl implements PostService {
     public List<Post> findAll() {
         return postRepository.findAll();
     }
+
+    @Override
+    public Post findById(Integer id) {
+        return postRepository.findById(id).orElseThrow(
+                () -> new PostNotFoundException(
+                        String.format(POST_NOT_FOUND_EXIST, id), HttpStatus.BAD_REQUEST
+                )
+        );
+    }
+
 }

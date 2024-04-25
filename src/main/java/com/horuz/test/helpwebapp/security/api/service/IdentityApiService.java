@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface IdentityApiService {
     Optional<CurrUser> currentUserAccount();
     Optional<Users> currentUserAccountUsername(Long id);
+    boolean hasRoleReceiver(String token);
+    boolean hasRoleHelper(String token);
 }
