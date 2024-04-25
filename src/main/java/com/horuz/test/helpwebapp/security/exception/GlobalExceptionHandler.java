@@ -1,5 +1,6 @@
 package com.horuz.test.helpwebapp.security.exception;
 
+import com.horuz.test.helpwebapp.post.exception.PostExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,16 @@ public class GlobalExceptionHandler extends Throwable {
 
     @ExceptionHandler(BadDataException.class)
     public ResponseEntity<Object> handleMarkerNotFoundException(BadDataException ex) {
+        return ResponseEntity.status(ex.getHttpStatus()).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex) {
+        return ResponseEntity.status(ex.getHttpStatus()).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(PostExistException.class)
+    public ResponseEntity<Object> handlePostExistException(PostExistException ex) {
         return ResponseEntity.status(ex.getHttpStatus()).body(ex.getMessage());
     }
 }

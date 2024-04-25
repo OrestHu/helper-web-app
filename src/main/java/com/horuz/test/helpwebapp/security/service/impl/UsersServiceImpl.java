@@ -33,6 +33,9 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     public Optional<Users> findByUsername(String username){
         return usersRepository.findByUsername(username);
     }
+    public Optional<Users> findById(Long id){
+        return usersRepository.findById(id);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
