@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface PostService {
     void createPost(Post post);
     List<Post> findAll();
+    List<Post> find(String text);
     Optional<Post> findById(Integer id);
     void deletePost(Integer postId);
     void changePost(Post post);

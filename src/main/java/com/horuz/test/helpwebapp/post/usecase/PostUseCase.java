@@ -11,6 +11,7 @@ import java.util.List;
 public interface PostUseCase {
     void createPost(@Valid PostRequest request);
     List<PostResponse> findAll();
+    List<PostResponse> find(String text);
     void deletePost(Integer postId);
     void changePost(Integer postId, PostRequest request);
 }

@@ -27,7 +27,11 @@ public class PostController {
     public List<PostResponse> findAll(){
         return postUseCase.findAll();
     }
-
+    @GetMapping("/find/{text}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<PostResponse> find(@PathVariable("text") String text){
+        return postUseCase.find(text);
+    }
     @DeleteMapping("/deletePost/{post_id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deletePost(@PathVariable("post_id") Integer postId){

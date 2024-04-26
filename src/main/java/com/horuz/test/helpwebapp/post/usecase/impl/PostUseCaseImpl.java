@@ -37,6 +37,15 @@ public class PostUseCaseImpl implements PostUseCase {
     }
 
     @Override
+    public List<PostResponse> find(String text) {
+        List<Post> posts = postService.find(text);
+        return posts
+                .stream()
+                .map(postToPostResponseMapper::map)
+                .toList();
+    }
+
+    @Override
     public void deletePost(Integer postId) {
         postService.deletePost(postId);
     }

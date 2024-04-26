@@ -33,6 +33,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> find(String text) {
+        return postRepository.findByDescriptionContaining(text);
+    }
+
+    @Override
     public Optional<Post> findById(Integer id) {
         return postRepository.findById(id);
     }

@@ -9,6 +9,7 @@ public record PostRequest(
         @NotBlank(message = "Name must be not blank")
         String name,
         @NotBlank(message = " must be not blank")
+        @Size(max = 50, message = " must have at most {max} characters")
         String description,
         @Size(min = 1, message = " must have at least {min} characters")
         @Size(max = 50, message = " must have at most {max} characters")
