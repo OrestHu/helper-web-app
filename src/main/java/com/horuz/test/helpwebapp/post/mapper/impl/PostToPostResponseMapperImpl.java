@@ -16,6 +16,7 @@ public class PostToPostResponseMapperImpl implements PostToPostResponseMapper {
                 source.getName(),
                 source.getDescription(),
                 source.getCity(),
+                source.getPhone(),
                 source.getImg(),
                 source.getCreatedTimeStamp()
         );

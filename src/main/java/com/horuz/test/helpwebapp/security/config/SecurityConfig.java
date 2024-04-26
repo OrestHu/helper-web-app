@@ -1,6 +1,5 @@
 package com.horuz.test.helpwebapp.security.config;
 
-import com.horuz.test.helpwebapp.security.service.UsersService;
 import com.horuz.test.helpwebapp.security.service.impl.UsersServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

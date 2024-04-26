@@ -7,6 +7,7 @@ public record PostResponse(
         String name,
         String description,
         String city,
+        String phone,
         String img,
         Instant createdTimeStamp
 ) {

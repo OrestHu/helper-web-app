@@ -3,13 +3,14 @@
 --changeset OrestHutovych:create-help-posts-table
 --comment create table help.posts
 create table help.posts(
-    id                serial primary key,
-    name              varchar(150) unique not null,
-    description       varchar(255),
-    city              varchar(100) not null,
-    img               varchar(255),
+    id                  serial primary key,
+    name                varchar(150) not null,
+    description         varchar(255),
+    city                varchar(100) not null,
+    phone               varchar(50) not null,
+    img                 varchar(255),
     created_time_stamp  timestamp not null,
-    user_id           integer not null
+    user_id             integer not null
 );
 --rollback drop table help.posts;
 

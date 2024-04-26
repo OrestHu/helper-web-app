@@ -14,6 +14,10 @@ public record PostRequest(
         @Size(max = 50, message = " must have at most {max} characters")
         @NotBlank(message = " must be not blank")
         String city,
+        @Size(min = 10, message = " must have at least {min} characters")
+        @Size(max = 10, message = " must have at most {max} characters")
+        @NotBlank(message = " must be not blank")
+        String phone,
         String img
 ) {
 }

@@ -1,5 +1,6 @@
 package com.horuz.test.helpwebapp.security.mapper.impl;
 
+import com.horuz.test.helpwebapp.post.utils.MessageUtil;
 import com.horuz.test.helpwebapp.security.mapper.RegisterRequestToUserMapper;
 import com.horuz.test.helpwebapp.security.model.Role;
 import com.horuz.test.helpwebapp.security.model.Users;
@@ -17,7 +18,6 @@ import java.util.Locale;
 public class RegisterRequestToUserMapperImpl implements RegisterRequestToUserMapper {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private static final String ROLE_NOT_FOUND_ERROR = "User role not found";
 
     @Override
     public Users map(RegisterRequest source) {
@@ -27,7 +27,7 @@ public class RegisterRequestToUserMapperImpl implements RegisterRequestToUserMap
         userAccount.setFullName(source.fullName());
         Role role = roleRepository.findByName(source.role())
                 .orElseThrow(() -> new RuntimeException(
-                        String.format(ROLE_NOT_FOUND_ERROR)
+                        String.format(MessageUtil.ROLE_NOT_FOUND_ERROR)
                 ));
         userAccount.setRoles(List.of(role));
         return userAccount;

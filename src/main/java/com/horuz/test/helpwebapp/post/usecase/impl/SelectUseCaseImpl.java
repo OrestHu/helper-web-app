@@ -8,6 +8,7 @@ import com.horuz.test.helpwebapp.post.model.req.FindRequest;
 import com.horuz.test.helpwebapp.post.model.resp.PostResponse;
 import com.horuz.test.helpwebapp.post.service.SelectService;
 import com.horuz.test.helpwebapp.post.usecase.SelectUseCase;
+import com.horuz.test.helpwebapp.post.utils.MessageUtil;
 import com.horuz.test.helpwebapp.security.api.model.CurrUser;
 import com.horuz.test.helpwebapp.security.api.service.IdentityApiService;
 import com.horuz.test.helpwebapp.security.exception.UserNotFoundException;
@@ -24,8 +25,6 @@ public class SelectUseCaseImpl implements SelectUseCase {
     private final PostToPostResponseMapper postToPostResponseMapper;
     private final SelectService selectService;
     private final IdentityApiService identityApiService;
-
-    private static final String USER_NOT_FOUND = "User not found";
     @Override
     public void makeSelect(FindRequest request) {
         List<Select> map = findRequestToListSelectMapper.map(request);
@@ -40,7 +39,7 @@ public class SelectUseCaseImpl implements SelectUseCase {
         CurrUser currUser = identityApiService.currentUserAccount()
                 .orElseThrow(
                         () -> new UserNotFoundException(
-                                USER_NOT_FOUND, HttpStatus.BAD_REQUEST
+                                MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST
                         )
                 );
         List<Post> posts = selectService.findPostsBySelects(currUser.id());
@@ -53,7 +52,6 @@ public class SelectUseCaseImpl implements SelectUseCase {
     @Override
     public void deleteSelects(FindRequest request) {
         request.list()
-                .stream()
                 .forEach(selectService::deleteSelects);
     }
 }

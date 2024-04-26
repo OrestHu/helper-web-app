@@ -17,7 +17,7 @@ alter table help.selects
 
 alter table help.selects
     add constraint selects__post_id__fk
-        foreign key (post_id) references help.posts(id);
+        foreign key (post_id) references help.posts(id) on delete cascade;
 
 alter table help.selects
     add constraint selects_unique

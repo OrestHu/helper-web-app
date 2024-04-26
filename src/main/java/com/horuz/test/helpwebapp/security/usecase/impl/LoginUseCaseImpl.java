@@ -1,5 +1,6 @@
 package com.horuz.test.helpwebapp.security.usecase.impl;
 
+import com.horuz.test.helpwebapp.post.utils.MessageUtil;
 import com.horuz.test.helpwebapp.security.exception.BadDataException;
 import com.horuz.test.helpwebapp.security.model.AccessToken;
 import com.horuz.test.helpwebapp.security.model.req.LoginRequest;
@@ -22,14 +23,13 @@ public class LoginUseCaseImpl implements LoginUseCase {
     private final AuthenticationManager authenticationManager;
     private final UsersServiceImpl userAccountService;
     private final JwtTokenUtils jwtTokenUtils;
-    private final static String BAD_CREDENTIALS = "Not found user %s";
     @Override
     public AccessToken authAcc(LoginRequest request) {
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username().toLowerCase(Locale.ROOT), request.password()));
         }catch (BadCredentialsException e){
             throw new BadDataException(
-                    String.format(BAD_CREDENTIALS, request.username()), HttpStatus.NOT_FOUND
+                    String.format(MessageUtil.BAD_CREDENTIALS, request.username()), HttpStatus.NOT_FOUND
             );
         }
         UserDetails userDetails = userAccountService.loadUserByUsername(request.username().toLowerCase(Locale.ROOT));

@@ -24,6 +24,7 @@ public class PostRequestToPostMapperImpl implements PostRequestToPostMapper {
         post.setName(source.name());
         post.setDescription(source.description());
         post.setCity(source.city());
+        post.setPhone(source.phone());
         post.setImg(source.img());
         post.setCreatedTimeStamp(Instant.now());
         post.setUser(users);

@@ -5,6 +5,7 @@ import com.horuz.test.helpwebapp.post.exception.PostNotFoundException;
 import com.horuz.test.helpwebapp.post.model.Post;
 import com.horuz.test.helpwebapp.post.repository.PostRepository;
 import com.horuz.test.helpwebapp.post.service.PostService;
+import com.horuz.test.helpwebapp.post.utils.MessageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,11 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
-    private static final String POST_ALREADY_EXIST = "Post %s already exist";
-    private static final String POST_NOT_FOUND_EXIST = "Post %s not found";
     @Override
     public void createPost(Post post) {
         if(postRepository.existsByName(post.getName())){
             throw new PostExistException(
-                    String.format(POST_ALREADY_EXIST, post.getName()), HttpStatus.CONFLICT
+                    String.format(MessageUtil.POST_ALREADY_EXIST, post.getName()), HttpStatus.CONFLICT
             );
         }
         postRepository.save(post);
@@ -34,12 +33,23 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findById(Integer id) {
-        return postRepository.findById(id).orElseThrow(
-                () -> new PostNotFoundException(
-                        String.format(POST_NOT_FOUND_EXIST, id), HttpStatus.BAD_REQUEST
-                )
-        );
+    public Optional<Post> findById(Integer id) {
+        return postRepository.findById(id);
+    }
+
+    @Override
+    public void deletePost(Integer postId) {
+        if(!postRepository.existsById(postId)){
+            throw new PostNotFoundException(
+                    String.format(MessageUtil.POST_NOT_FOUND, postId), HttpStatus.BAD_REQUEST
+            );
+        }
+        postRepository.deleteById(postId);
+    }
+
+    @Override
+    public void changePost(Post post) {
+        postRepository.save(post);
     }
 
 }

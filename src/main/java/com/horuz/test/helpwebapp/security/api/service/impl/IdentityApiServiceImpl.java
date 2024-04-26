@@ -1,5 +1,6 @@
 package com.horuz.test.helpwebapp.security.api.service.impl;
 
+import com.horuz.test.helpwebapp.post.utils.MessageUtil;
 import com.horuz.test.helpwebapp.security.api.model.CurrUser;
 import com.horuz.test.helpwebapp.security.api.service.IdentityApiService;
 import com.horuz.test.helpwebapp.security.exception.UserNotFoundException;
@@ -22,7 +23,6 @@ public class IdentityApiServiceImpl implements IdentityApiService {
     private final UsersServiceImpl usersService;
     private final JwtTokenUtils jwtTokenUtils;
 
-    private static final String USER_NOT_FOUND = "User not found by id %s";
     @Override
     public Optional<CurrUser> currentUserAccount() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
@@ -42,7 +42,7 @@ public class IdentityApiServiceImpl implements IdentityApiService {
     public Optional<Users> currentUserAccountUsername(Long id) {
         Users userAccount = usersService.findById(id)
                 .orElseThrow(() ->
-                        new UserNotFoundException(String.format(USER_NOT_FOUND, id), HttpStatus.NOT_FOUND)
+                        new UserNotFoundException(String.format(MessageUtil.USER_NOT_FOUND, id), HttpStatus.NOT_FOUND)
                 );
         return Optional.of(userAccount);
     }
