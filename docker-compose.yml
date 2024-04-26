@@ -1,0 +1,10 @@
+version: '3.0'
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      - POSTGRES_USER=help_app
+      - POSTGRES_PASSWORD=help-app-password
+      - POSTGRES_DB=help_app_db
+    ports:
+      - '5432:5432'
