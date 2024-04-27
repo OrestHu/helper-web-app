@@ -8,5 +8,6 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Integer> {
     boolean existsByName(String name);
     boolean existsById(Integer id);
+
     List<Post> findByDescriptionContaining(String text);
 }

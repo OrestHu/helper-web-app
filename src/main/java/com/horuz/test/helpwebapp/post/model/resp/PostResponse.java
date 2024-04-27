@@ -9,6 +9,7 @@ public record PostResponse(
         String city,
         String phone,
         String img,
-        Instant createdTimeStamp
+        Instant createdTimeStamp,
+        boolean selected
 ) {
 }

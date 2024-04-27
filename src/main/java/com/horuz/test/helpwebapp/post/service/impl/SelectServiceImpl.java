@@ -37,6 +37,33 @@ public class SelectServiceImpl implements SelectService {
     }
 
     @Override
+    public List<Select> findSelectByUser(Long user_id) {
+        return selectRepository.findByUserId(user_id);
+    }
+
+
+    @Override
+    public List<Select> listSelected(Long id) {
+        return selectRepository.findByUserId(id);
+    }
+
+    @Override
+    public boolean selected(Integer postId) {
+        CurrUser currUser = identityApiService.currentUserAccount().orElseThrow(
+                () -> new UserNotFoundException(MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST)
+        );
+        List<Select> byUserId = selectRepository.findByUserId(currUser.id());
+
+        for (Select select : byUserId) {
+            Integer id = select.getPost().getId();
+            if (id.equals(postId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void deleteSelects(Integer selects) {
         CurrUser currUser = identityApiService.currentUserAccount().orElseThrow(
                 () -> new UserNotFoundException(MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST)

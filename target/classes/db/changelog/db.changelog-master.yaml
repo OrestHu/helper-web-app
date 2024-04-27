@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: 0.0.1/changelog-create-identity_help-schema.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 0.0.1/changelog-create-help-schema.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 0.0.1/changelog-create-posts-table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 0.0.1/changelog-create-selects-table.sql
+      relativeToChangelogFile: true

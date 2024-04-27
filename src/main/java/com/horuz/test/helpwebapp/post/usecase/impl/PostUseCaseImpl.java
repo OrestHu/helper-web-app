@@ -45,6 +45,7 @@ public class PostUseCaseImpl implements PostUseCase {
                 .toList();
     }
 
+
     @Override
     public void deletePost(Integer postId) {
         postService.deletePost(postId);

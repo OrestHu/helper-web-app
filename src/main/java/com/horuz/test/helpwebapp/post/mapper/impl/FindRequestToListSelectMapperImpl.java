@@ -23,17 +23,17 @@ public class FindRequestToListSelectMapperImpl implements FindRequestToListSelec
     private final IdentityApiService identityApiService;
     private final PostRepository postRepository;
     @Override
-    public List<Select> map(FindRequest source) {
+    public List<Select> map(List<Integer> source) {
         CurrUser currUser = identityApiService.currentUserAccount()
                 .orElseThrow(() -> new UserNotFoundException(MessageUtil.USER_NOT_FOUND, HttpStatus.BAD_REQUEST));
-        List<Integer> postListId = source.list();
+
         List<Select> selects = new ArrayList<>();
 
-        for(int i = 0; i < postListId.size(); i++){
+        for(int i = 0; i < source.size(); i++){
             Select select = new Select();
             select.setUserId(currUser.id());
-            Integer idPost = postListId.get(i);
-            Post post = postRepository.findById(postListId.get(i)).orElseThrow(
+            Integer idPost = source.get(i);
+            Post post = postRepository.findById(source.get(i)).orElseThrow(
                     () -> new PostNotFoundException(
                             String.format(MessageUtil.POST_NOT_FOUND, idPost), HttpStatus.BAD_REQUEST
                     )

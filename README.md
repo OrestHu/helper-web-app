@@ -21,4 +21,3 @@ END-PONT
 - /api/v1/post/changePost/{post_id} [PATCH] - Редагувати пост для RECEIVER
 - /api/v1/select/makeSelect [POST] - Добавити пости в збережене для HELPER
 - /api/v1/select/findSelects [GET] - Получити всі збережені для HELPER
-- /api/v1/select/deleteSelects [DELETE] - Забрати пости з збереженого для HELPER

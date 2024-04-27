@@ -6,5 +6,5 @@ import com.horuz.test.helpwebapp.security.mapper.Mapper;
 
 import java.util.List;
 
-public interface FindRequestToListSelectMapper extends Mapper<List<Select>, FindRequest> {
+public interface FindRequestToListSelectMapper extends Mapper<List<Select>, List<Integer>> {
 }

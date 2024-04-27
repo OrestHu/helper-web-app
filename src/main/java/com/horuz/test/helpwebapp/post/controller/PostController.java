@@ -1,6 +1,7 @@
 package com.horuz.test.helpwebapp.post.controller;
 
 import com.horuz.test.helpwebapp.post.model.req.PostRequest;
+import com.horuz.test.helpwebapp.post.model.resp.SelectedResponse;
 import com.horuz.test.helpwebapp.post.model.resp.PostResponse;
 import com.horuz.test.helpwebapp.post.usecase.PostUseCase;
 import jakarta.validation.Valid;
@@ -21,7 +22,6 @@ public class PostController {
     public void createPost(@Valid @RequestBody PostRequest request){
         postUseCase.createPost(request);
     }
-
     @GetMapping("/findAll")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<PostResponse> findAll(){

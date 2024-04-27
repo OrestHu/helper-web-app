@@ -8,5 +8,8 @@ import java.util.List;
 public interface SelectService {
     void makeSelect(Select select);
     List<Post> findPostsBySelects(Long user_id);
+    List<Select> findSelectByUser(Long user_id);
+    List<Select> listSelected(Long id);
+    boolean selected(Integer postId);
     void deleteSelects(Integer integer);
 }
