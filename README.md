@@ -17,7 +17,7 @@ END-PONT
 - /api/v1/post/create [POST] - Створення посту для RECEIVER
 - /api/v1/post/findAll [GET] - Пошук всіх постів для RECEIVER
 - /api/v1/post/find/{text} [GET] - Пошук по Name для RECEIVER
-- /api/v1/post/deletePost/{post_id} [DELETE] - Удалити пост для RECEIVER
+- /api/v1/post/deletePost [DELETE] - Удалити пости для RECEIVER
 - /api/v1/post/changePost/{post_id} [PATCH] - Редагувати пост для RECEIVER
 - /api/v1/select/makeSelect [POST] - Добавити пости в збережене для HELPER
 - /api/v1/select/findSelects [GET] - Получити всі збережені для HELPER

@@ -1,5 +1,6 @@
 package com.horuz.test.helpwebapp.post.controller;
 
+import com.horuz.test.helpwebapp.post.model.req.FindRequest;
 import com.horuz.test.helpwebapp.post.model.req.PostRequest;
 import com.horuz.test.helpwebapp.post.model.resp.SelectedResponse;
 import com.horuz.test.helpwebapp.post.model.resp.PostResponse;
@@ -37,10 +38,10 @@ public class PostController {
     public List<PostResponse> find(@PathVariable("text") String text){
         return postUseCase.find(text);
     }
-    @DeleteMapping("/deletePost/{post_id}")
+    @DeleteMapping("/deletePost")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deletePost(@PathVariable("post_id") Integer postId){
-        postUseCase.deletePost(postId);
+    public void deletePost(@RequestBody FindRequest request){
+        postUseCase.deletePost(request);
     }
 
     @PatchMapping("/changePost/{post_id}")
