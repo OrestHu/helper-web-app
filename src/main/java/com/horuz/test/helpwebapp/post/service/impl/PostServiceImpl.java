@@ -6,6 +6,7 @@ import com.horuz.test.helpwebapp.post.model.Post;
 import com.horuz.test.helpwebapp.post.repository.PostRepository;
 import com.horuz.test.helpwebapp.post.service.PostService;
 import com.horuz.test.helpwebapp.post.utils.MessageUtil;
+import com.horuz.test.helpwebapp.security.model.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> find(String text) {
         return postRepository.findByNameContainingIgnoreCase(text);
+    }
+
+    @Override
+    public List<Post> findByReceiver(Users users) {
+        return postRepository.findAllByUser(users);
     }
 
     @Override

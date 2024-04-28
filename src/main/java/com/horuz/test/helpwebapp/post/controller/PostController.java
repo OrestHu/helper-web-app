@@ -27,6 +27,11 @@ public class PostController {
     public List<PostResponse> findAll(){
         return postUseCase.findAll();
     }
+    @GetMapping("/findByReceiver")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<PostResponse> findByReceiver(){
+        return postUseCase.findByReceiver();
+    }
     @GetMapping("/find/{text}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<PostResponse> find(@PathVariable("text") String text){
