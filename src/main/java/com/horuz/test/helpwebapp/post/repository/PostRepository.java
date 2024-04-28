@@ -10,4 +10,5 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     boolean existsById(Integer id);
 
     List<Post> findByDescriptionContaining(String text);
+    List<Post> findByNameContaining(String text);
 }
