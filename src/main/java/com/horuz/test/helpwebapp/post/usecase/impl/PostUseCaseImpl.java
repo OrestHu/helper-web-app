@@ -1,6 +1,5 @@
 package com.horuz.test.helpwebapp.post.usecase.impl;
 
-import com.horuz.test.helpwebapp.post.exception.PostNotFoundException;
 import com.horuz.test.helpwebapp.post.mapper.PostRequestToPostMapper;
 import com.horuz.test.helpwebapp.post.mapper.PostToPostResponseMapper;
 import com.horuz.test.helpwebapp.post.model.Post;
@@ -11,7 +10,6 @@ import com.horuz.test.helpwebapp.post.usecase.PostUseCase;
 import com.horuz.test.helpwebapp.post.utils.MessageUtil;
 import com.horuz.test.helpwebapp.security.api.model.CurrUser;
 import com.horuz.test.helpwebapp.security.api.service.IdentityApiService;
-import com.horuz.test.helpwebapp.security.exception.UserNotFoundException;
 import com.horuz.test.helpwebapp.security.model.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -54,13 +52,13 @@ public class PostUseCaseImpl implements PostUseCase {
     public List<PostResponse> findByReceiver() {
         CurrUser currUser = identityApiService.currentUserAccount()
                 .orElseThrow(
-                        () -> new UserNotFoundException(
-                                MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST
+                        () -> new RuntimeException(
+                                MessageUtil.USER_NOT_FOUND_NOT_NAME
                         )
                 );
         Users users = identityApiService.currentUserAccountUsername(currUser.id()).orElseThrow(
-                () -> new UserNotFoundException(
-                        MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST
+                () -> new RuntimeException(
+                        MessageUtil.USER_NOT_FOUND_NOT_NAME
                 )
         );
         List<Post> byReceiver = postService.findByReceiver(users);
@@ -79,8 +77,8 @@ public class PostUseCaseImpl implements PostUseCase {
     @Override
     public void changePost(Integer postId, PostRequest request) {
         Post post = postService.findById(postId).orElseThrow(
-                () -> new PostNotFoundException(
-                        String.format(MessageUtil.POST_NOT_FOUND, postId), HttpStatus.BAD_REQUEST
+                () -> new RuntimeException(
+                        String.format(MessageUtil.POST_NOT_FOUND, postId)
                 )
         );
 

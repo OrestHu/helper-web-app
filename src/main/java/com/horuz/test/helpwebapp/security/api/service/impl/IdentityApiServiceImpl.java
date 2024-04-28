@@ -3,12 +3,10 @@ package com.horuz.test.helpwebapp.security.api.service.impl;
 import com.horuz.test.helpwebapp.post.utils.MessageUtil;
 import com.horuz.test.helpwebapp.security.api.model.CurrUser;
 import com.horuz.test.helpwebapp.security.api.service.IdentityApiService;
-import com.horuz.test.helpwebapp.security.exception.UserNotFoundException;
 import com.horuz.test.helpwebapp.security.model.Users;
 import com.horuz.test.helpwebapp.security.service.impl.UsersServiceImpl;
 import com.horuz.test.helpwebapp.security.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,7 +40,7 @@ public class IdentityApiServiceImpl implements IdentityApiService {
     public Optional<Users> currentUserAccountUsername(Long id) {
         Users userAccount = usersService.findById(id)
                 .orElseThrow(() ->
-                        new UserNotFoundException(String.format(MessageUtil.USER_NOT_FOUND, id), HttpStatus.NOT_FOUND)
+                        new RuntimeException(String.format(MessageUtil.USER_NOT_FOUND, id))
                 );
         return Optional.of(userAccount);
     }

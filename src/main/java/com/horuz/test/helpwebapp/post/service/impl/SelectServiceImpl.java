@@ -1,6 +1,5 @@
 package com.horuz.test.helpwebapp.post.service.impl;
 
-import com.horuz.test.helpwebapp.post.exception.PostNotFoundException;
 import com.horuz.test.helpwebapp.post.model.Post;
 import com.horuz.test.helpwebapp.post.model.Select;
 import com.horuz.test.helpwebapp.post.repository.SelectRepository;
@@ -8,7 +7,6 @@ import com.horuz.test.helpwebapp.post.service.SelectService;
 import com.horuz.test.helpwebapp.post.utils.MessageUtil;
 import com.horuz.test.helpwebapp.security.api.model.CurrUser;
 import com.horuz.test.helpwebapp.security.api.service.IdentityApiService;
-import com.horuz.test.helpwebapp.security.exception.UserNotFoundException;
 import com.horuz.test.helpwebapp.security.model.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -50,7 +48,7 @@ public class SelectServiceImpl implements SelectService {
     @Override
     public boolean selected(Integer postId) {
         CurrUser currUser = identityApiService.currentUserAccount().orElseThrow(
-                () -> new UserNotFoundException(MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST)
+                () -> new RuntimeException(MessageUtil.USER_NOT_FOUND_NOT_NAME)
         );
         List<Select> byUserId = selectRepository.findByUserId(currUser.id());
 
@@ -66,7 +64,7 @@ public class SelectServiceImpl implements SelectService {
     @Override
     public void deleteSelects(Integer selects) {
         CurrUser currUser = identityApiService.currentUserAccount().orElseThrow(
-                () -> new UserNotFoundException(MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST)
+                () -> new RuntimeException(MessageUtil.USER_NOT_FOUND_NOT_NAME)
         );
         List<Select> byUserId = selectRepository.findByUserId(currUser.id());
         System.out.println(byUserId);
@@ -81,12 +79,11 @@ public class SelectServiceImpl implements SelectService {
         }
         if (!selectFound) {
             Users users = identityApiService.currentUserAccountUsername(currUser.id()).orElseThrow();
-            throw new PostNotFoundException(
+            throw new RuntimeException(
                     String.format(
                             MessageUtil.POST_NOT_FOUND_BY_USER_SELECT,
                             selects,
-                            users.getUsername()),
-                    HttpStatus.BAD_REQUEST
+                            users.getUsername())
             );
         }
     }

@@ -1,7 +1,7 @@
 package com.horuz.test.helpwebapp.security.usecase.impl;
 
 import com.horuz.test.helpwebapp.post.utils.MessageUtil;
-import com.horuz.test.helpwebapp.security.exception.BadDataException;
+
 import com.horuz.test.helpwebapp.security.model.AccessToken;
 import com.horuz.test.helpwebapp.security.model.req.LoginRequest;
 import com.horuz.test.helpwebapp.security.service.impl.UsersServiceImpl;
@@ -28,8 +28,8 @@ public class LoginUseCaseImpl implements LoginUseCase {
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username().toLowerCase(Locale.ROOT), request.password()));
         }catch (BadCredentialsException e){
-            throw new BadDataException(
-                    String.format(MessageUtil.BAD_CREDENTIALS, request.username()), HttpStatus.NOT_FOUND
+            throw new RuntimeException(
+                    String.format(MessageUtil.BAD_CREDENTIALS, request.username())
             );
         }
         UserDetails userDetails = userAccountService.loadUserByUsername(request.username().toLowerCase(Locale.ROOT));

@@ -13,7 +13,6 @@ import com.horuz.test.helpwebapp.post.usecase.SelectUseCase;
 import com.horuz.test.helpwebapp.post.utils.MessageUtil;
 import com.horuz.test.helpwebapp.security.api.model.CurrUser;
 import com.horuz.test.helpwebapp.security.api.service.IdentityApiService;
-import com.horuz.test.helpwebapp.security.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -33,8 +32,8 @@ public class SelectUseCaseImpl implements SelectUseCase {
     public void makeSelect(FindRequest request) {
         CurrUser currUser = identityApiService.currentUserAccount()
                 .orElseThrow(
-                        () -> new UserNotFoundException(
-                                MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST
+                        () -> new RuntimeException(
+                                MessageUtil.USER_NOT_FOUND_NOT_NAME
                         )
                 );
 
@@ -64,8 +63,8 @@ public class SelectUseCaseImpl implements SelectUseCase {
     public List<PostResponse> findPostsBySelects() {
         CurrUser currUser = identityApiService.currentUserAccount()
                 .orElseThrow(
-                        () -> new UserNotFoundException(
-                                MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST
+                        () -> new RuntimeException(
+                                MessageUtil.USER_NOT_FOUND_NOT_NAME
                         )
                 );
         List<Post> posts = selectService.findPostsBySelects(currUser.id());
@@ -79,8 +78,8 @@ public class SelectUseCaseImpl implements SelectUseCase {
     public SelectedResponse listSelected() {
         CurrUser currUser = identityApiService.currentUserAccount()
                 .orElseThrow(
-                        () -> new UserNotFoundException(
-                                MessageUtil.USER_NOT_FOUND_NOT_NAME, HttpStatus.BAD_REQUEST
+                        () -> new RuntimeException(
+                                MessageUtil.USER_NOT_FOUND_NOT_NAME
                         )
                 );
         List<Select> selects = selectService.listSelected(currUser.id());

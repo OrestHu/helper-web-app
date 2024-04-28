@@ -1,7 +1,5 @@
 package com.horuz.test.helpwebapp.post.service.impl;
 
-import com.horuz.test.helpwebapp.post.exception.PostExistException;
-import com.horuz.test.helpwebapp.post.exception.PostNotFoundException;
 import com.horuz.test.helpwebapp.post.model.Post;
 import com.horuz.test.helpwebapp.post.repository.PostRepository;
 import com.horuz.test.helpwebapp.post.service.PostService;
@@ -22,8 +20,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public void createPost(Post post) {
         if(postRepository.existsByName(post.getName())){
-            throw new PostExistException(
-                    String.format(MessageUtil.POST_ALREADY_EXIST, post.getName()), HttpStatus.CONFLICT
+            throw new RuntimeException(
+                    String.format(MessageUtil.POST_ALREADY_EXIST, post.getName())
             );
         }
         postRepository.save(post);
@@ -51,8 +49,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deletePost(Integer postId) {
         if(!postRepository.existsById(postId)){
-            throw new PostNotFoundException(
-                    String.format(MessageUtil.POST_NOT_FOUND, postId), HttpStatus.BAD_REQUEST
+            throw new RuntimeException(
+                    String.format(MessageUtil.POST_NOT_FOUND, postId)
             );
         }
         postRepository.deleteById(postId);

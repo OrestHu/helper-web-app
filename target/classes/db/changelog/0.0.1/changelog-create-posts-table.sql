@@ -8,7 +8,7 @@ create table help.posts(
     description         varchar(255),
     city                varchar(100) not null,
     phone               varchar(50) not null,
-    img                 varchar(255),
+    img                 varchar(65535),
     created_time_stamp  timestamp not null,
     user_id             integer not null
 );

@@ -1,4 +1,3 @@
-com\horuz\test\helpwebapp\security\exception\BadDataException.class
 com\horuz\test\helpwebapp\security\repository\RoleRepository.class
 com\horuz\test\helpwebapp\post\mapper\PostRequestToPostMapper.class
 com\horuz\test\helpwebapp\post\mapper\PostToPostResponseMapper.class
@@ -25,14 +24,12 @@ com\horuz\test\helpwebapp\security\controller\ValidateController.class
 com\horuz\test\helpwebapp\security\usecase\impl\ValidateUseCaseImpl.class
 com\horuz\test\helpwebapp\HelpWebAppApplication.class
 com\horuz\test\helpwebapp\post\repository\PostRepository.class
-com\horuz\test\helpwebapp\post\exception\PostExistException.class
 com\horuz\test\helpwebapp\post\usecase\PostUseCase.class
 com\horuz\test\helpwebapp\post\model\req\PostRequest.class
 com\horuz\test\helpwebapp\post\usecase\impl\PostUseCaseImpl.class
 com\horuz\test\helpwebapp\post\controller\SelectController.class
 com\horuz\test\helpwebapp\post\service\impl\PostServiceImpl.class
 com\horuz\test\helpwebapp\security\controller\LoginController.class
-com\horuz\test\helpwebapp\security\exception\UserNotFoundException.class
 com\horuz\test\helpwebapp\security\model\Users.class
 com\horuz\test\helpwebapp\security\exception\GlobalExceptionHandler.class
 com\horuz\test\helpwebapp\post\utils\MessageUtil.class
@@ -45,7 +42,6 @@ com\horuz\test\helpwebapp\security\usecase\RegisterUseCase.class
 com\horuz\test\helpwebapp\security\repository\UsersRepository.class
 com\horuz\test\helpwebapp\post\model\req\FindRequest.class
 com\horuz\test\helpwebapp\post\usecase\impl\SelectUseCaseImpl.class
-com\horuz\test\helpwebapp\post\exception\PostNotFoundException.class
 com\horuz\test\helpwebapp\security\api\service\impl\IdentityApiServiceImpl.class
 com\horuz\test\helpwebapp\security\usecase\impl\RegisterUseCaseImpl.class
 com\horuz\test\helpwebapp\security\usecase\LoginUseCase.class
