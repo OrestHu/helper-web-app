@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.*;
 public class ValidateController {
     private final ValidateUseCase validateUseCase;
 
+    @GetMapping("/checkValidToken/{jwt}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public boolean checkValidToken(@PathVariable("jwt") String jwt){
+        return validateUseCase.checkValidToken(jwt);
+    }
+
     @GetMapping("/checkReceiver/{jwt}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public boolean checkReceiver(@PathVariable("jwt") String jwt){
