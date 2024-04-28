@@ -22,7 +22,7 @@ public class RegisterRequestToUserMapperImpl implements RegisterRequestToUserMap
     @Override
     public Users map(RegisterRequest source) {
         Users userAccount = new Users();
-        userAccount.setUsername(source.username().toLowerCase(Locale.ROOT));
+        userAccount.setUsername(source.email().toLowerCase(Locale.ROOT));
         userAccount.setPassword(passwordEncoder.encode(source.password()));
         userAccount.setFullName(source.fullName());
         Role role = roleRepository.findByName(source.role())

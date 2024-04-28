@@ -26,13 +26,13 @@ public class LoginUseCaseImpl implements LoginUseCase {
     @Override
     public AccessToken authAcc(LoginRequest request) {
         try{
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username().toLowerCase(Locale.ROOT), request.password()));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email().toLowerCase(Locale.ROOT), request.password()));
         }catch (BadCredentialsException e){
             throw new RuntimeException(
-                    String.format(MessageUtil.BAD_CREDENTIALS, request.username())
+                    String.format(MessageUtil.BAD_CREDENTIALS, request.email())
             );
         }
-        UserDetails userDetails = userAccountService.loadUserByUsername(request.username().toLowerCase(Locale.ROOT));
+        UserDetails userDetails = userAccountService.loadUserByUsername(request.email().toLowerCase(Locale.ROOT));
         String token = jwtTokenUtils.generateJwtToken(userDetails);
         return new AccessToken(token);
     }
